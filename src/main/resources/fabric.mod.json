@@ -1,0 +1,21 @@
+{
+  "schemaVersion": 1,
+  "id": "weightedhotbar",
+  "version": "${version}",
+  "name": "Weighted Hotbar Randomizer",
+  "description": "Automatically rotates hotbar slot after block placement using weighted randomness based on stack size.",
+  "authors": ["Chronicle"],
+  "contact": {},
+  "license": "MIT",
+  "environment": "client",
+  "entrypoints": {
+    "client": ["com.weightedhotbar.WeightedHotbarRandomizer"]
+  },
+  "mixins": ["weightedhotbar.mixins.json"],
+  "depends": {
+    "minecraft": ">=26.1",
+    "fabricloader": ">=0.19.1",
+    "java": ">=25",
+    "fabric-api": "*"
+  }
+}
