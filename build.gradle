@@ -25,6 +25,12 @@ tasks.withType(JavaCompile).configureEach {
     options.release = 25
 }
 
+processResources {
+    filesMatching("fabric.mod.json") {
+        expand version: project.version
+    }
+}
+
 jar {
     from("LICENSE") {
         rename { "${it}_${rootProject.name}" }
