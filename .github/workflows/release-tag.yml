@@ -1,0 +1,56 @@
+name: Release
+
+on:
+  push:
+    tags: ['v*-mc*']
+
+jobs:
+  release:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Setup Java 25
+        uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: 25
+
+      - name: Setup Gradle
+        uses: gradle/actions/setup-gradle@v4
+
+      - name: Extract versions from tag
+        id: tag
+        run: |
+          TAG="${GITHUB_REF#refs/tags/}"
+          # Tag format: v<mod-version>-mc<mc-version>
+          MOD_VERSION="${TAG#v}"
+          MOD_VERSION="${MOD_VERSION%-mc*}"
+          MC_VERSION="${TAG#*-mc}"
+          echo "tag=$TAG" >> "$GITHUB_OUTPUT"
+          echo "mod_version=$MOD_VERSION" >> "$GITHUB_OUTPUT"
+          echo "mc_version=$MC_VERSION" >> "$GITHUB_OUTPUT"
+
+      - name: Validate tag matches gradle.properties
+        run: |
+          PROPS_MOD_VERSION=$(grep '^mod_version=' gradle.properties | cut -d= -f2)
+          PROPS_MC_VERSION=$(grep '^minecraft_version=' gradle.properties | cut -d= -f2)
+          if [ "$PROPS_MOD_VERSION" != "${{ steps.tag.outputs.mod_version }}" ]; then
+            echo "::error::Tag mod version (${{ steps.tag.outputs.mod_version }}) does not match gradle.properties ($PROPS_MOD_VERSION)"
+            exit 1
+          fi
+          if [ "$PROPS_MC_VERSION" != "${{ steps.tag.outputs.mc_version }}" ]; then
+            echo "::error::Tag MC version (${{ steps.tag.outputs.mc_version }}) does not match gradle.properties ($PROPS_MC_VERSION)"
+            exit 1
+          fi
+
+      - name: Build
+        run: ./gradlew build
+
+      - name: Create GitHub Release
+        uses: softprops/action-gh-release@v2
+        with:
+          files: build/libs/*.jar
+          generate_release_notes: true

@@ -1,0 +1,1 @@
+- [Project Overview](project_overview.md) — Client-side Minecraft Fabric mod (Java), GitHub hosted with Actions CI
