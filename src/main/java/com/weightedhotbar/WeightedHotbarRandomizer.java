@@ -6,8 +6,8 @@ import com.weightedhotbar.feedback.FeedbackService;
 import net.fabricmc.api.ClientModInitializer;
 import net.fabricmc.fabric.api.client.event.lifecycle.v1.ClientTickEvents;
 import net.fabricmc.fabric.api.client.keymapping.v1.KeyMappingHelper;
+import com.mojang.blaze3d.platform.InputConstants;
 import net.minecraft.client.KeyMapping;
-import org.lwjgl.glfw.GLFW;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -24,7 +24,7 @@ public class WeightedHotbarRandomizer implements ClientModInitializer {
 
         toggleKeybind = KeyMappingHelper.registerKeyMapping(new KeyMapping(
                 "key.weightedhotbar.toggle",
-                GLFW.GLFW_KEY_H,
+                InputConstants.UNKNOWN.getValue(),
                 KeyMapping.Category.MISC
         ));
 

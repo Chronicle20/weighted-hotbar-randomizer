@@ -6,7 +6,7 @@ A client-side Fabric mod for Minecraft 26.1+ that automatically rotates your sel
 
 - **Weighted random slot selection** after block placement (higher stack count = higher probability)
 - **Configurable slot range** (1–9) to limit which slots participate
-- **Toggle keybind** (default: H) with action bar feedback
+- **Toggle keybind** (unbound by default) with action bar feedback
 - **Client commands** for full control
 - **JSON config** persists across sessions
 - **Client-side only** — works on any server
@@ -31,11 +31,9 @@ All commands use the `/weightedhotbar` prefix (client-side only):
 
 ## Keybinds
 
-| Key | Action |
-|-----|--------|
-| H | Toggle mod on/off |
-
-Rebindable in Options > Controls.
+The mod registers a toggle keybind that is **unbound by default** to avoid
+collisions with other mods. Bind it yourself in Options > Controls, under
+the "Miscellaneous" category — look for "Toggle Weighted Hotbar".
 
 ## Configuration
 
