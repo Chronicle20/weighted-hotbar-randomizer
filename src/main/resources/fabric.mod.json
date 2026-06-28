@@ -13,8 +13,8 @@
   },
   "mixins": ["weightedhotbar.mixins.json"],
   "depends": {
-    "minecraft": ">=26.1",
-    "fabricloader": ">=0.19.1",
+    "minecraft": ">=26.2",
+    "fabricloader": ">=0.19.3",
     "java": ">=25",
     "fabric-api": "*"
   }
