@@ -10,7 +10,9 @@
   ],
   "timezone": "UTC",
   "configMigration": true,
-  "dependencyDashboard": true,
+  "dependencyDashboard": {
+    "enabled": true
+  },
   "enabledManagers": ["gradle", "github-actions"],
   "minimumReleaseAge": "7 days",
   "internalChecksFilter": "strict",
